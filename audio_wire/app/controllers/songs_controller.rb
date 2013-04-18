@@ -1,6 +1,6 @@
 class SongsController < ApplicationController
 
-before_filter :after_token_authentication
+#before_filter :after_token_authentication
 
   def after_token_authentication
     if params[:auth_token].present?
@@ -62,7 +62,10 @@ before_filter :after_token_authentication
   # POST /songs.json
   def create
     @song = Song.new(params[:song])
-
+    if params[:song].nil?
+      hash = {:artist => params[:artist], :title => params[:title], :band => params[:band]}
+      @song = Song.new(hash)
+    end
     respond_to do |format|
       if @song.save
         format.html { redirect_to @song, notice: 'Song was successfully created.' }
