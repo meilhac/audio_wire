@@ -2,7 +2,6 @@ class   RegistrationsController < Devise::RegistrationsController
   prepend_before_filter :require_no_authentication, :only => [ :new, :create, :cancel ]
   prepend_before_filter :authenticate_scope!, :only => [:edit, :update, :destroy]
 
-
   def     new
     super
   end
@@ -14,7 +13,6 @@ class   RegistrationsController < Devise::RegistrationsController
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_navigational_format?
         sign_up(resource_name, resource)
-        debugger
         render :status=>200, :json=>{:token=>@user.authentication_token}
         #respond_with resource, :location => after_sign_up_path_for(resource)
       else
