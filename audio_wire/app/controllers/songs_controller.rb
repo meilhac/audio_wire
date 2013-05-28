@@ -1,34 +1,25 @@
 class SongsController < ApplicationController
+# prepend_before_filter :require_no_authentication
+# before_filter :after_token_authentication
+#before_filter :authenticate_user!
 
-#before_filter :after_token_authentication
+#     def after_token_authentication
+#         if params[:auth_token].present?
+#             @user = User.find_by_authentication_token(params[:auth_token]) # we are finding
 
-  def after_token_authentication
-    if params[:auth_token].present?
-      @user = User.find_by_authentication_token(params[:auth_token]) # we are finding                                                          
-
-      if (@user == nil)
-        respond_to do |format|
-          format.html # index.html.erb                                                                                                         
-          format.json { render json: 'Wrong token' }
-        end
-      end
-    else
-      respond_to do |format|
-        format.html # index.html.erb                                                                                                           
-        format.json { render json: 'You need a token' }
-      end
-    end
-  end
+#             if (@user == nil)
+#                 render :json => { :error => "Wrong token" }
+#             end
+#         else
+#             render :json => { :error => "You need a token" }
+#         end
+#     end
 
   # GET /songs
   # GET /songs.json
   def index
     @songs = Song.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @songs }
-    end
+    render json: @songs
   end
 
   # GET /songs/1
