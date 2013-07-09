@@ -11,16 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130418101421) do
+ActiveRecord::Schema.define(:version => 20130624213625) do
 
-  create_table "songs", :force => true do |t|
+  create_table "tracks", :force => true do |t|
+    t.integer  "numberTrack"
     t.string   "title"
+    t.string   "genre"
     t.string   "artist"
-    t.string   "band"
-    t.integer  "duration"
-    t.string   "category"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "album"
+    t.time     "time"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.string   "song_file_name"
+    t.string   "song_content_type"
+    t.integer  "song_file_size"
+    t.datetime "song_updated_at"
   end
 
   create_table "users", :force => true do |t|
@@ -37,6 +42,10 @@ ActiveRecord::Schema.define(:version => 20130418101421) do
     t.string   "authentication_token"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true
