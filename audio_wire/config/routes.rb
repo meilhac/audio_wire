@@ -1,6 +1,5 @@
 AudioWire::Application.routes.draw do
 
-
   root :to => "home#index"
 
   get "home/index"
@@ -13,8 +12,13 @@ AudioWire::Application.routes.draw do
   match '/users/sign_in' => 'tokens#create', :via => :post
   match '/users/sign_out' => 'tokens#delete',:via => :delete
   match '/users/update' => 'users#update', :via => :put
-  match '/tracks/download' => 'tracks#download', :via => :post
+  match '/tracks/download' => 'tracks#download', :via => :get
   match '/tracks/upload' => 'tracks#upload', :via => :post
+  match '/tracks' => 'tracks#list', :via => :get
+  match '/tracks' => 'tracks#delete', :via => :delete
+  match '/friendships' => 'friendships#create', :via => :post
+  match '/friendships/list' => 'friendships#list', :via => :get
+  match '/friendships' => 'friendships#destroy', :via => :delete
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
